@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculadora UPRA - Leonardo Kimuanga</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:linear-gradient(135deg,#0f172a,#2563eb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+
+}
+
+
+.card{
+
+    width:430px;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+
+}
+
+
+h1{
+
+    text-align:center;
+    color:#0f172a;
+    margin-bottom:10px;
+
+}
+
+
+.subtitulo{
+
+    text-align:center;
+    color:#555;
+    margin-bottom:20px;
+
+}
+
+
+label{
+
+    font-weight:bold;
+    margin-top:15px;
+    display:block;
+
+}
+
+
+input{
+
+    width:100%;
+    padding:12px;
+    margin-top:7px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+
+}
+
+
+.botoes{
+
+    display:flex;
+    gap:10px;
+}
+
+
+button{
+
+    width:100%;
+    margin-top:25px;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+.resultado{
+
+    margin-top:25px;
+    padding:20px;
+    background:#f1f5f9;
+    border-radius:12px;
+    line-height:2;
+
+}
+
+
+.valor{
+
+    color:#2563eb;
+    font-weight:bold;
+
+}
+
+
+footer{
+
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+    font-size:14px;
+
+}
+
+
+.info{
+
+    background:#dbeafe;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-size:14px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="card">
+
+
+<h1>Calculadora UPRA</h1>
+
+<p class="subtitulo">
+Cálculo da Média Académica
+</p>
+
+
+<div class="info">
+
+📌 Podes calcular apenas a Média Parcial ou adicionar o Exame para ver a Nota Final.
+
+</div>
+
+
+
+<label>Prova Parcelar I</label>
+<input type="number" id="p1" min="0" max="20" step="0.01">
+
+
+<label>Prova Parcelar II</label>
+<input type="number" id="p2" min="0" max="20" step="0.01">
+
+
+<label>Avaliação Contínua</label>
+<input type="number" id="ac" min="0" max="20" step="0.01">
+
+
+<label>Exame Final (opcional)</label>
+<input type="number" id="ef" min="0" max="20" step="0.01">
+
+
+
+<div class="botoes">
+
+<button onclick="calcularParcial()">
+Ver Média
+</button>
+
+
+<button onclick="calcularFinal()">
+Com Exame
+</button>
+
+
+</div>
+
+
+
+<div class="resultado">
+
+
+<p>
+Média das Provas (MP):
+<span class="valor" id="mp">0</span>
+</p>
+
+
+<p>
+Média Parcial (Y):
+<span class="valor" id="y">0</span>
+</p>
+
+
+<p>
+Nota Final:
+<span class="valor" id="nf">-</span>
+</p>
+
+
+</div>
+
+
+
+<footer>
+
+Desenvolvido por <b>Leonardo Kimuanga</b>
+
+</footer>
+
+
+
+</div>
+
+
+
+<script>
+
+
+function validar(valor){
+
+return valor >=0 && valor <=20;
+
+}
+
+
+
+function calcularParcial(){
+
+
+let p1=parseFloat(document.getElementById("p1").value);
+let p2=parseFloat(document.getElementById("p2").value);
+let ac=parseFloat(document.getElementById("ac").value);
+
+
+
+if(!validar(p1)||!validar(p2)||!validar(ac)){
+
+alert("Preencha todas as notas corretamente entre 0 e 20");
+return;
+
+}
+
+
+
+let mp=(p1+p2)/2;
+
+
+let y=(ac*0.15)+(mp*0.85);
+
+
+
+document.getElementById("mp").innerHTML=mp.toFixed(2);
+
+document.getElementById("y").innerHTML=y.toFixed(2);
+
+document.getElementById("nf").innerHTML="-";
+
+
+}
+
+
+
+function calcularFinal(){
+
+
+let p1=parseFloat(document.getElementById("p1").value);
+let p2=parseFloat(document.getElementById("p2").value);
+let ac=parseFloat(document.getElementById("ac").value);
+let ef=parseFloat(document.getElementById("ef").value);
+
+
+
+if(!validar(p1)||!validar(p2)||!validar(ac)||!validar(ef)){
+
+
+alert("Preencha todas as notas corretamente entre 0 e 20");
+
+return;
+
+}
+
+
+
+let mp=(p1+p2)/2;
+
+
+let y=(ac*0.15)+(mp*0.85);
+
+
+let nf=(y*0.40)+(ef*0.60);
+
+
+
+document.getElementById("mp").innerHTML=mp.toFixed(2);
+
+document.getElementById("y").innerHTML=y.toFixed(2);
+
+document.getElementById("nf").innerHTML=nf.toFixed(2);
+
+
+
+}
+
+
+</script>
+
+
+
+</body>
+</html>
